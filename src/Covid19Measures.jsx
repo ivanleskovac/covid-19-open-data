@@ -33,19 +33,30 @@ export class Covid19Measures extends PureComponent {
   };
 
   componentDidMount() {
-    this.retrieveAllCovid19Measures(this.refreshMeasures);
+    this.retrieveCovid19Measures();
   }
 
-  retrieveAllCovid19Measures(refreshMeasures) {
-    let file = require("./MeasuresData.csv");
+  retrieveCovid19Measures() {
+    const url =
+      "https://covid19opendatabucket.s3.us-east-2.amazonaws.com/MeasuresData.csv";
 
-    Papa.parse(file, {
-      download: true,
-      header: true,
-      complete: function(results) {
-        this.setState({ measuresCollection: results.data });
-      }.bind(this)
-    });
+    fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "text/csv",
+        "Content-Type": "text/csv"
+      }
+    })
+      .then(function(response) {
+        return response.text();
+      })
+      .then(
+        function(response) {
+          this.setState({
+            measuresCollection: Papa.parse(response, { header: true }).data
+          });
+        }.bind(this)
+      );
   }
 
   renderEventList(measures) {
@@ -316,7 +327,11 @@ export class Covid19Measures extends PureComponent {
           <CitationPaper elevation={3}>
             Data source:
             <br />
-            <a href="https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker" target="blank" style={{cursor: "pointer"}}>
+            <a
+              href="https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker"
+              target="blank"
+              style={{ cursor: "pointer" }}
+            >
               Hale, Thomas, Sam Webster, Anna Petherick, Toby Phillips, and
               Beatriz Kira (2020). Oxford COVID-19 Government Response Tracker,
               Blavatnik School of Government
