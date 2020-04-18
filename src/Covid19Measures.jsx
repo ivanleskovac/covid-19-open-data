@@ -316,7 +316,7 @@ export class Covid19Measures extends PureComponent {
           <CitationPaper elevation={3}>
             Data source:
             <br />
-            <a href="https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker">
+            <a href="https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker" target="blank" style={{cursor: "pointer"}}>
               Hale, Thomas, Sam Webster, Anna Petherick, Toby Phillips, and
               Beatriz Kira (2020). Oxford COVID-19 Government Response Tracker,
               Blavatnik School of Government
