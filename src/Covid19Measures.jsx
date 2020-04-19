@@ -239,6 +239,10 @@ export class Covid19Measures extends PureComponent {
         chartType="Timeline"
         loader={<div>Loading Chart</div>}
         data={timelineData}
+        options={{
+          colors: ["#b2d8d8", "#66b2b2", "#008080", "#006666", "#004c4c"],
+          backgroundColor: '#ffd',
+        }}
         rootProps={{ "data-testid": "7" }}
       />
     );
